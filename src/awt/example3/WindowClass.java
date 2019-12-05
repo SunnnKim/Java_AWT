@@ -1,5 +1,6 @@
 package awt.example3;
 
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +21,8 @@ public class WindowClass extends JFrame {
 	int chance =0;
 	JLabel title;
 	JTextField num1, num2, num3;
-	JTextArea result;
+	JTextField result;
+	JTextField result2;
 	JButton okBtn;
 	JButton reset;
 	
@@ -35,11 +37,11 @@ public class WindowClass extends JFrame {
 		title.setLocation(20, 10);
 		add(title);
 		
-		num1 = new JTextField("");
+		num1 = new JTextField(2);
 		num1.setHorizontalAlignment(JTextField.CENTER);
-		num2 = new JTextField("");
+		num2 = new JTextField(2);
 		num2.setHorizontalAlignment(JTextField.CENTER);
-		num3 = new JTextField("");
+		num3 = new JTextField(2);
 		num3.setHorizontalAlignment(JTextField.CENTER);
 		num1.setSize(100, 50);
 		num1.setLocation(20,100);
@@ -54,12 +56,18 @@ public class WindowClass extends JFrame {
 		
 		
 		// result 창
-		
-		result = new JTextArea("결과");
-		result.setBounds(20, 200, 340, 70);
-		result.getAlignmentX();
-		
+		result = new JTextField("게임 시작");
+		result.setHorizontalAlignment(JTextField.CENTER);
+		result.setBounds(20, 200, 340, 30);
+		result.setFont(new Font(null, Font.BOLD, 14));
+		result.setEditable(false);
 		add(result);
+		
+		result2 = new JTextField("남은 기회: 10번");
+		result2.setHorizontalAlignment(JTextField.CENTER);
+		result2.setBounds(20, 230, 340, 30);
+		result2.setEditable(false);
+		add(result2);
 		
 		okBtn = new JButton("확인");
 		okBtn.setSize(340, 50);
@@ -74,7 +82,6 @@ public class WindowClass extends JFrame {
 		
 		
 		okBtn.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(result.getText().equals("Game Clear") || result.getText().equals("Game Over")) {
@@ -121,9 +128,11 @@ public class WindowClass extends JFrame {
 					return;
 				}
 				result.setText(strike + "Strike, " + ball + "Ball. ");
+				result2.setText("남은 기회 : "+ (10-chance)+"회");
 				num1.setText("");
 				num2.setText("");
 				num3.setText("");
+				num1.requestFocus();
 			}
 
 			
@@ -145,7 +154,7 @@ public class WindowClass extends JFrame {
 				rNum = createRNum();
 				chance = 0;
 				String str = "게임 다시 시작!"+"\n";
-				str+= "남은 기회: "+chance + "회";
+				str+= "남은 기회: "+(10-chance) + "회";
 				result.setText(str);
 			}
 		});
