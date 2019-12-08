@@ -17,27 +17,28 @@ import javax.swing.border.Border;
 
 public class WindowClass extends JFrame {
 	private int num=0;
-	JLabel label1[] ;
+	JLabel label1 ;
 	JButton [] btn;
 	JTextField result;
 	public WindowClass() {
 		
 		
-		label1 = new JLabel[3];
+		setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
 		panel.setSize(400, 120);
-		panel.setLayout(new GridLayout(1,1));
+		panel.setLocation(0, 0);
+		panel.setLayout(new GridLayout(1,0));
 		add(panel);
-		label1[0] = new JLabel(num+"");
-		label1[0].setHorizontalAlignment(JLabel.CENTER);
-		label1[0].setFont(new Font(null, Font.BOLD, 30));
-		panel.add(label1[0]);
+		
+		label1 = new JLabel(num+"");
+		label1.setHorizontalAlignment(JLabel.CENTER);
+		label1.setFont(new Font(null, Font.BOLD, 30));
+		label1.setLocation(100, 0);
+		panel.add(label1);
 		
 		
 		JPanel panel2 = new JPanel();
-		panel2.setBackground(Color.WHITE);
 		panel2.setLocation(0, 120);
 		panel2.setSize(400,100 );
 		panel2.setLayout(new GridLayout(1,2,80,0));
@@ -52,6 +53,17 @@ public class WindowClass extends JFrame {
 			
 		}
 		
+		JButton reset = new JButton("Reset");
+		reset.setBounds(75, 220, 250, 80);
+		add(reset);
+		reset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				label1.setText("0");
+			}
+		});
 		btn[0].setText("+");
 		btn[1].setText("-");
 		
@@ -61,7 +73,7 @@ public class WindowClass extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				num++;
-				label1[0].setText(num+"");
+				label1.setText(num+"");
 				result.setText("UP");
 			}
 		});
@@ -71,18 +83,18 @@ public class WindowClass extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				num--;
-				label1[0].setText(num+"");
+				label1.setText(num+"");
 				result.setText("DOWN");
 			}
 		});
 		
 		JPanel panel3 = new JPanel();
-		panel3.setBackground(Color.WHITE);
 		panel3.setLocation(0,300);
 		panel3.setSize(400, 100);
 		
 		
 		result = new JTextField("Up / Down");
+		result.setBounds(0, 0, 300, 100);
 		result.setHorizontalAlignment(JTextField.CENTER);
 		
 		panel3.add(result);
